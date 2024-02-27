@@ -25,6 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".component.TaskActivity"
+            android:exported="true"
+            android:theme="@style/Theme.beangotown" />
     </application>
 
 </manifest>
