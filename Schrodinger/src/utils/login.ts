@@ -3,8 +3,8 @@ interface ILoginHandler{
 }
 
 class GoogleLogin implements ILoginHandler{
-  login(): Promise<string> {
-    throw new Error("Method not implemented.");
+  async login(): Promise<string> {
+    return 'xiofjoksafj';
   }
 }
 
