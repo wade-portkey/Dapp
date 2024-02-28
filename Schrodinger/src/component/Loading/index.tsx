@@ -21,7 +21,7 @@ type LoadingPositionType = 'center' | 'bottom';
 export function LoadingBody({ text }: { text?: string; position?: LoadingPositionType; iconType: IconType }) {
   return (
     <View style={[styles.center, styles.loadingWrap]}>
-      <Lottie source={require('assets/lottieFiles/globalLoading.json')} style={styles.loadingStyle} autoPlay loop />
+      <Lottie source={require('./globalLoading.json')} style={styles.loadingStyle} autoPlay loop />
       <Text style={styles.textStyles}>{text}</Text>
     </View>
   );
