@@ -1,3 +1,5 @@
+import appleLoginCall from './applelogin';
+
 interface ILoginHandler{
   login(): Promise<string>;
 }
@@ -10,7 +12,7 @@ class GoogleLogin implements ILoginHandler{
 
 class AppleLogin implements ILoginHandler{
   login(): Promise<string> {
-    throw new Error("Method not implemented.");
+    return appleLoginCall();
   }
 }
 
