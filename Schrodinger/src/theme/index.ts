@@ -1,6 +1,12 @@
 
-export const defaultColors = {
 
+import { windowHeight } from '../utils/device';
+import { isIOS } from '@rneui/base';
+import { makeStyles } from '@rneui/themed';
+import { pTd } from '../utils/unit';
+import gSTyles from '../utils/GStyles';
+export const defaultColors = {
+  primaryColor: '#5B8EF4',
   bg1: '#ffffff',
   bg2: '#FEF6E7',
   bg3: '#F3E4E4',
@@ -61,4 +67,22 @@ export const defaultColors = {
   shadow1: '#4D4E59',
 };
 
-
+export const useGStyles = makeStyles(theme => {
+  return {
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.bg1,
+      ...gSTyles.paddingArg(0, 16),
+    },
+    pwTip: {
+      marginTop: 3,
+      color: theme.colors.font2,
+    },
+    safeAreaContainer: {
+      paddingBottom: !isIOS ? 20 : undefined,
+    },
+    overlayStyle: {
+      height: windowHeight - pTd(isIOS ? 68 : 100),
+    },
+  };
+});

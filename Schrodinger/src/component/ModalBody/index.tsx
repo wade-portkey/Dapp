@@ -6,13 +6,13 @@ import { screenWidth } from '../../utils/device';
 import { pTd } from '../../utils/unit';
 import { defaultColors } from '../../theme';
 import { TextXL } from '../CommonText';
-import Svg from 'components/Svg';
-import GStyles from 'assets/theme/GStyles';
-import fonts from 'assets/theme/fonts';
-import { useGStyles } from 'assets/theme/useGStyles';
-import ButtonRow from 'components/ButtonRow';
-import { CommonButtonProps } from 'components/CommonButton';
-import { ViewStyleType } from 'types/styles';
+import Svg from '../Svg';
+import GStyles from '../../utils/GStyles';
+import fonts from '../../theme/fonts';
+import { useGStyles } from '../../theme';
+import ButtonRow from '../ButtonRow';
+import { CommonButtonProps } from '../CommonButton';
+import { ViewStyleType } from '../../types/styles';
 
 export interface ModalBodyProps extends ViewProps {
   title?: string;

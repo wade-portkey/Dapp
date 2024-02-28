@@ -1,3 +1,5 @@
+import { useTelegramAuthentication } from "./telegramLogin";
+
 interface ILoginHandler{
   login(): Promise<string>;
 }
@@ -15,8 +17,10 @@ class AppleLogin implements ILoginHandler{
 }
 
 class TelegramLogin implements ILoginHandler{
-  login(): Promise<string> {
-    throw new Error("Method not implemented.");
+  async login(): Promise<string> {
+    const { telegramSign } = useTelegramAuthentication();
+    const info = await telegramSign();
+    return info.accessToken;
   }
 }
 

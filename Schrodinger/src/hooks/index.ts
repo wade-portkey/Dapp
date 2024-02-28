@@ -15,3 +15,11 @@ export function useThrottleCallback<T extends (...args: any[]) => any>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }
+
+export function useCurrentNetworkInfo(){
+  return {
+    apiUrl: 'https://aa-portkey.portkey.finance',
+    networkType: 'MAINNET',
+  }
+}
+// https://aa-portkey.portkey.finance

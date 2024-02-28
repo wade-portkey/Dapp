@@ -7,14 +7,8 @@ import Lottie from 'lottie-react-native';
 import { pTd } from '../../utils/unit';
 import { StyleSheet } from 'react-native';
 import GStyles from '../../utils/GStyles';
-import { BGStyles } from 'assets/theme/styles';
-import { USER_CANCELED } from '@portkey-wallet/constants/errorMessage';
+import { BGStyles } from '../../theme/styles';
 import { parseUrl } from 'query-string';
-import { parseTelegramToken } from '@portkey-wallet/utils/authentication';
-import { OpenLogin } from '@portkey-wallet/constants/constants-ca/network';
-import { useCurrentNetworkInfo } from '@portkey-wallet/hooks/hooks-ca/network';
-
-import { TelegramAuthentication } from 'hooks/authentication';
 import { WebViewNavigationEvent } from 'react-native-webview/lib/WebViewTypes';
 import { WebViewMessageEvent } from 'react-native-webview';
 import {
@@ -28,8 +22,13 @@ import {
   parseTGAuthResult,
 } from './config';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { isIOS } from '@portkey-wallet/utils/mobile/device';
+import { isIOS } from '../../utils/device';
+import { TelegramAuthentication, parseTelegramToken } from '../../utils/telegramLogin';
+import { useCurrentNetworkInfo } from '../../hooks';
 
+
+const USER_CANCELED = 'user canceled';
+const OpenLogin = `https://openlogin.portkey.finance`;
 type TelegramSignProps = {
   onConfirm: (userInfo: TelegramAuthentication) => void;
   onReject: (reason: any) => void;
