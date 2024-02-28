@@ -4,3 +4,5 @@ beangotown/android/.gradle/
 beangotown/android/.idea/
 beangotown/android/local.properties
 **/node_modules/**
+.idea
+**/build/**
