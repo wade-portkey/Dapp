@@ -1,0 +1,6 @@
+.DS_Store
+beangotown/.DS_Store
+beangotown/android/.gradle/
+beangotown/android/.idea/
+beangotown/android/local.properties
+**/node_modules/**
