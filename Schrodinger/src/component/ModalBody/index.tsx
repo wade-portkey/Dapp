@@ -9,7 +9,7 @@ import { TextXL } from '../CommonText';
 import Svg from '../Svg';
 import GStyles from '../../utils/GStyles';
 import fonts from '../../theme/fonts';
-import { useGStyles } from '../../theme';
+import { getGStyles } from '../../theme';
 import ButtonRow from '../ButtonRow';
 import { CommonButtonProps } from '../CommonButton';
 import { ViewStyleType } from '../../types/styles';
@@ -43,7 +43,7 @@ export const ModalBody: React.FC<ModalBodyProps> = props => {
     bottomButtonGroup,
   } = props;
 
-  const gStyles = useGStyles();
+  const gStyles = getGStyles();
 
   if (modalBodyType === 'bottom') {
     return (

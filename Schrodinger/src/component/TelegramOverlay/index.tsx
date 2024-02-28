@@ -8,7 +8,7 @@ import { pTd } from '../../utils/unit';
 import { StyleSheet } from 'react-native';
 import GStyles from '../../utils/GStyles';
 import { BGStyles } from '../../theme/styles';
-import { parseUrl } from 'query-string';
+import queryString from 'query-string';
 import { WebViewNavigationEvent } from 'react-native-webview/lib/WebViewTypes';
 import { WebViewMessageEvent } from 'react-native-webview';
 import {
@@ -23,7 +23,7 @@ import {
 } from './config';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { isIOS } from '../../utils/device';
-import { TelegramAuthentication, parseTelegramToken } from '../../utils/telegramLogin';
+import { TelegramAuthentication, parseTelegramToken } from '../../utils/logic';
 import { useCurrentNetworkInfo } from '../../hooks';
 
 
@@ -50,7 +50,7 @@ function TelegramSign({ onConfirm, onReject }: TelegramSignProps) {
         } else if (nativeEvent.url.includes(TGAuthCallBack)) {
           try {
             if (nativeEvent.url.includes(TGAuthCallBack)) {
-              const parseData = parseUrl(nativeEvent.url);
+              const parseData = queryString.parseUrl(nativeEvent.url);
               const { token } = parseData.query || {};
               if (typeof token === 'string') {
                 const user = parseTelegramToken(token);
@@ -94,13 +94,14 @@ function TelegramSign({ onConfirm, onReject }: TelegramSignProps) {
     },
     [onReject],
   );
+  console.log( 'url', uri);
   return (
     <ModalBody title="Telegram Login" modalBodyType="bottom">
       <KeyboardAwareScrollView enableOnAndroid={true} contentContainerStyle={styles.container}>
         {loading && (
           <View style={styles.loadingBox}>
             <Lottie
-              source={require('assets/lottieFiles/globalLoading.json')}
+              source={require('../../assets/lottieFiles/globalLoading.json')}
               style={styles.loadingStyle}
               autoPlay
               loop

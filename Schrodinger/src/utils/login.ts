@@ -1,6 +1,7 @@
-import { useTelegramAuthentication } from "./telegramLogin";
+import TelegramOverlay from "../component/TelegramOverlay";
+import { TelegramLogin } from "./telegramLogin";
 
-interface ILoginHandler{
+export interface ILoginHandler{
   login(): Promise<string>;
 }
 
@@ -13,14 +14,6 @@ class GoogleLogin implements ILoginHandler{
 class AppleLogin implements ILoginHandler{
   login(): Promise<string> {
     throw new Error("Method not implemented.");
-  }
-}
-
-class TelegramLogin implements ILoginHandler{
-  async login(): Promise<string> {
-    const { telegramSign } = useTelegramAuthentication();
-    const info = await telegramSign();
-    return info.accessToken;
   }
 }
 

@@ -67,16 +67,16 @@ export const defaultColors = {
   shadow1: '#4D4E59',
 };
 
-export const useGStyles = makeStyles(theme => {
+export const getGStyles = () => {
   return {
     container: {
       flex: 1,
-      backgroundColor: theme.colors.bg1,
+      backgroundColor: defaultColors.bg1,
       ...gSTyles.paddingArg(0, 16),
     },
     pwTip: {
       marginTop: 3,
-      color: theme.colors.font2,
+      color: defaultColors.font2,
     },
     safeAreaContainer: {
       paddingBottom: !isIOS ? 20 : undefined,
@@ -85,4 +85,4 @@ export const useGStyles = makeStyles(theme => {
       height: windowHeight - pTd(isIOS ? 68 : 100),
     },
   };
-});
+};

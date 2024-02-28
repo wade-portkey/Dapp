@@ -1,5 +1,5 @@
-import { stringify }   from 'query-string';
-
+import queryString   from 'query-string';
+import base64 from 'react-native-base64';
 export enum TG_FUN {
   LoginCancel = 'tg_loginCancel',
   DeclineRequest = 'tg_declineRequest',
@@ -55,7 +55,17 @@ export const TGAuthCallBack = 'auth-callback';
 
 export function parseTGAuthResult(url: string) {
   const tgAuthResult = Buffer.from(url.split(TGAuthResult)[1], 'base64').toString('utf8');
-  return stringify(JSON.parse(tgAuthResult));
+  return queryString.stringify(JSON.parse(tgAuthResult));
 }
-
+// export function parseTGAuthResult(url: string) {
+//   const tgAuthResult = base64.decode(url.split(TGAuthResult)[1]);
+//   console.log('tgAuthResult', tgAuthResult);
+//   try {
+//     const result = JSON.parse(tgAuthResult);
+//     return JSON.stringify(result);
+//   } catch (error) {
+//     console.error('Invalid JSON:', tgAuthResult);
+//     throw error;
+//   }
+// }
 export const TelegramUrl = 'tg://resolve?phone=42777';

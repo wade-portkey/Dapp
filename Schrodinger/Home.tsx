@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { LoadingBody } from './src/component/Loading';
 import { useLogin } from './hook';
+import { telegramLogin } from './src/utils/login';
 const injectJavaScript = `
     const tmpFunction = window.postMessage;
     window.originalPostMessage = tmpFunction;
@@ -10,20 +11,20 @@ const injectJavaScript = `
 `;
 const injectedJavaScript = `
 (function clientMethod() {
-  var APP = {
+  var portkeyAPP = {
       __GLOBAL_FUNC_INDEX__: 0,
       invokeClientMethod: function (request, callback) {
           const {type, params} = request;
           var callbackName;
           if (typeof callback === 'function') {
-              callbackName = '__CALLBACK__' + (APP.__GLOBAL_FUNC_INDEX__++);
-              APP[callbackName] = callback;
+              callbackName = '__CALLBACK__' + (portkeyAPP.__GLOBAL_FUNC_INDEX__++);
+              portkeyAPP[callbackName] = callback;
           }
           window.ReactNativeWebView.postMessage(JSON.stringify({type, params, callback: callbackName }));
       },
       invokeWebMethod: function (callback, args) {
           if (typeof callback==='string') {
-              var func = APP[callback];
+              var func = portkeyAPP[callback];
               if (typeof func === 'function') {
                   setTimeout(function () {
                       func.call(this, args);
@@ -32,19 +33,12 @@ const injectedJavaScript = `
           }
       },
   };
-  window.APP = APP;
+  window.portkeyAPP = portkeyAPP;
   window.webviewCallback = function(data) {
       console.log('webviewCallback', data);
-      window.APP['invokeWebMethod'](data.callback, data.args);
+      window.portkeyAPP['invokeWebMethod'](data.callback, data.args);
   };
 })();true;
-setTimeout(()=>{
-window.APP.invokeClientMethod({
-  type: 'login', params: {type: 'google'}
-}, (args)=>{
-  console.log('args', args);
-})
-}, 15000)
 `;
 let webRef: any;
 
@@ -59,12 +53,18 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
   const {
     width = '100%',
     height = '100%',
-    source = { uri: 'http://192.168.66.186:3001' },
+    source = { uri: 'http://192.168.11.126:3002' },
   } = props;
   console.log('load webview')
   const webViewRef = React.useRef<WebView>(null);
   // const [loading, setLoading] = useState(true);
   // deal with Webview(dapp) message post
+  // useEffect(()=>{
+  //   setTimeout(async ()=>{
+  //     const token =  await telegramLogin.login();
+  //     console.log('token', token);
+  //   }, 10000);
+  // }, []);
   const handleMessage = useCallback(
     async (content: WebViewMessageEvent) => {
       console.log('from webview msg is:', JSON.stringify(content.nativeEvent.data));
