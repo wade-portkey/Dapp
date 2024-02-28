@@ -1,0 +1,34 @@
+
+# OSX
+#
+.DS_Store
+
+.idea
+.eslintcache
+.idea
+
+.vscode
+
+ignore/
+**/*.zip
+
+coverage
+
+# iOS
+*.xcuserstate  
+/**/xcuserdata/**
+/**/Pods/**
+Pods/
+Pods
+/**/*.apk
+/**/output-metadata.json
+
+/**/*.bundle
+/**/.expo
+
+
+.env
+output/
+dist/
+postinstall.log
+
