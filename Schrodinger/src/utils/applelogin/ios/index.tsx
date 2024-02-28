@@ -1,10 +1,9 @@
 import React from 'react';
 import AppleLogin from './AppleLogin';
-import OverlayModal from 'components/OverlayModal';
-import { screenWidth } from 'packages/utils/mobile/device';
+import OverlayModal from '../../../component/OverlayModal';
+import { screenWidth } from '../../unit';
 
-async function appleLogin() {
-  let timer: undefined | NodeJS.Timer;
+async function appleLoginOnIOS() {
   return new Promise((resolve, reject) => {
     const key = OverlayModal.show(
       <AppleLogin
@@ -43,4 +42,4 @@ async function appleLogin() {
   });
 }
 
-export { appleLogin };
+export { appleLoginOnIOS };
