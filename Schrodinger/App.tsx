@@ -1,14 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import CommonWebView from './Home';
+import { StyleSheet, Image, View } from 'react-native';
 
 export default function App() {
   console.log('load App');
   return (
     <View style={styles.container}>
-      {/* <Text>Open up App.tsx to start working on your app!</Text> */}
-      <CommonWebView source={{uri: 'https://beangotown.com/'}}/>
-      {/* <StatusBar style="auto" /> */}
+      <Image source={require('../Schrodinger/src/assets/png/splashscreen_image.png')} style={styles.image} />
     </View>
   );
 }
@@ -16,8 +12,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f00',
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  image: {
+    height: '100%',
+    width: '100%',
   },
 });
