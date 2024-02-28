@@ -1,22 +1,22 @@
-interface ILoginHandler{
+interface ILoginHandler {
   login(): Promise<string>;
 }
 
-class GoogleLogin implements ILoginHandler{
+class GoogleLogin implements ILoginHandler {
   async login(): Promise<string> {
     return 'xiofjoksafj';
   }
 }
 
-class AppleLogin implements ILoginHandler{
+class AppleLogin implements ILoginHandler {
   login(): Promise<string> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }
 
-class TelegramLogin implements ILoginHandler{
+class TelegramLogin implements ILoginHandler {
   login(): Promise<string> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }
 
