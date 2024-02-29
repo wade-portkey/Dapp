@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import CommonWebView from './Home';
 import { useFonts } from 'expo-font';
 global.Buffer = require('buffer').Buffer;
@@ -11,12 +11,12 @@ export default function App() {
     'Roboto-Medium': require('./src/assets/fonts/Roboto-Medium.ttf'),
   });
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* <Text>Open up App.tsx to start working on your app!</Text> */}
       {/* <CommonWebView source={{uri: 'https://beangotown.com/'}}/> */}
       <CommonWebView />
       {/* <StatusBar style="auto" /> */}
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -24,7 +24,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f00',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },

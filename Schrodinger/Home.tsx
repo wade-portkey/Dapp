@@ -53,7 +53,7 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
   const {
     width = '100%',
     height = '100%',
-    source = { uri: 'http://192.168.11.126:3002' },
+    source = { uri: 'http://localhost:3000' },
   } = props;
   console.log('load webview')
   const webViewRef = React.useRef<WebView>(null);
@@ -123,7 +123,7 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
           console.log('onLoadEnd',event.nativeEvent.url);
         }}
         // onLoad={() => overWriteFuncOfWebview()}
-        style={{ height: height, width: width, backgroundColor: 'yellow' }}
+        style={{ height: height, width: width }}
         onMessage={handleMessage}
         {...props}
         injectedJavaScript={injectedJavaScript}

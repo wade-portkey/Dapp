@@ -3,7 +3,9 @@ import AppleLogin from './AppleLogin';
 import OverlayModal from '../../../component/OverlayModal';
 import { screenWidth } from '../../unit';
 
-async function appleLoginOnIOS() {
+const USER_CANCELED = 'user canceled';
+
+async function appleLogin() {
   return new Promise((resolve, reject) => {
     const key = OverlayModal.show(
       <AppleLogin
@@ -29,17 +31,11 @@ async function appleLoginOnIOS() {
         }}
       />,
       {
-        modal: true,
-        type: 'zoomOut',
         position: 'bottom',
-        containerStyle: {
-          width: screenWidth,
-          height: '100%',
-          backgroundColor: 'transparent',
-        },
+        onDisappearCompleted: () => reject(new Error(USER_CANCELED)),
       },
     );
   });
 }
 
-export { appleLoginOnIOS };
+export default appleLogin;

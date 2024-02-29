@@ -3,6 +3,12 @@ import { forwardRef, useMemo, useState, useCallback, useRef, useImperativeHandle
 import { StyleSheet, View, ViewStyle, StyleProp, TouchableOpacity } from 'react-native';
 import WebView, { WebViewMessageEvent, WebViewProps } from 'react-native-webview';
 import { LoadingBody } from '../../../component/Loading';
+import { ModalBody } from '../../../component/ModalBody';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import GStyles from '../../../utils/GStyles';
+import { BGStyles } from '../../../theme/styles';
+import { pTd } from '../../../utils/unit';
+import Lottie from 'lottie-react-native';
 
 export declare type AppleLoginInterface = {
   open(): void;
@@ -10,6 +16,23 @@ export declare type AppleLoginInterface = {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    position: 'relative',
+  },
+  loadingStyle: {
+    width: pTd(50),
+  },
+  loadingBox: {
+    ...GStyles.center,
+    ...BGStyles.bg1,
+    zIndex: 999,
+    position: 'absolute',
+    bottom: 0,
+    top: 0,
+    left: 0,
+    right: 0,
+  },
   webView: {
     flex: 1,
     backgroundColor: 'white',
@@ -142,8 +165,18 @@ const AppleLogin = forwardRef(function AppleLogin(
   };
 
   return (
-    <>
-      <TouchableOpacity style={styles.transparentHeader} onPress={onClose} />
+    <ModalBody title="Apple Login" modalBodyType="bottom">
+      <KeyboardAwareScrollView enableOnAndroid={true} contentContainerStyle={styles.container}>
+        {loading && (
+          <View style={styles.loadingBox}>
+            <Lottie
+              source={require('../../../assets/lottieFiles/globalLoading.json')}
+              style={styles.loadingStyle}
+              autoPlay
+              loop
+            />
+          </View>
+        )}
       <WebView
         ref={webViewRef}
         source={{ uri: baseUrl }}
@@ -162,7 +195,8 @@ const AppleLogin = forwardRef(function AppleLogin(
         })()`}
       />
       {renderLoading()}
-    </>
+      </KeyboardAwareScrollView>
+    </ModalBody>
   );
 });
 
