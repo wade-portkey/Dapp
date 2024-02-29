@@ -2,7 +2,7 @@ import * as Google from 'expo-auth-session/providers/google';
 import * as Application from 'expo-application';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import { isIOS } from './utils';
-import { AccessTokenRequest, makeRedirectUri } from 'expo-auth-session';
+import { AccessTokenRequest, makeRedirectUri, AuthRequest } from 'expo-auth-session';
 
 const Config = {
   GOOGLE_IOS_CLIENT_ID: '183226380326-38oi8hev1fug9js9gpbtdicgqgb81a78.apps.googleusercontent.com',
@@ -10,13 +10,11 @@ const Config = {
 };
 
 const googleLogin = async () => {
-  const [googleRequest, response, promptAsync] = Google.useAuthRequest({
-    iosClientId: Config.GOOGLE_IOS_CLIENT_ID,
-    androidClientId: Config.GOOGLE_ANDROID_CLIENT_ID,
-    shouldAutoExchangeCode: false,
-  });
+  const request = new AuthRequest({ clientId: Config.GOOGLE_IOS_CLIENT_ID ?? '', redirectUri: makeRedirectUri({
+    native: `${Application.applicationId}:/oauthredirect`,
+  }), scopes: ['openid', 'profile', 'email']});
   const iosPromptAsync: () => Promise<string> = async () => {
-    const info = await promptAsync();
+    const info = await request.promptAsync(Google.discovery);
     if (info.type === 'success') {
       const exchangeRequest = new AccessTokenRequest({
         clientId: Config.GOOGLE_IOS_CLIENT_ID ?? '',
@@ -25,7 +23,7 @@ const googleLogin = async () => {
         }),
         code: info.params.code,
         extraParams: {
-          code_verifier: googleRequest?.codeVerifier || '',
+          code_verifier: request?.codeVerifier || '',
         },
       });
       const authentication = await exchangeRequest.performAsync(Google.discovery);
