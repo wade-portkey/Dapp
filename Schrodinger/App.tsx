@@ -28,4 +28,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  image: {
+    height: '100%',
+    width: '100%',
+  },
 });

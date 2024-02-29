@@ -7,13 +7,13 @@ export interface ILoginHandler{
   login(): Promise<string>;
 }
 
-class GoogleLogin implements ILoginHandler{
+class GoogleLogin implements ILoginHandler {
   async login(): Promise<string> {
     return googleLoginCall();
   }
 }
 
-class AppleLogin implements ILoginHandler{
+class AppleLogin implements ILoginHandler {
   login(): Promise<string> {
     return appleLoginCall();
   }

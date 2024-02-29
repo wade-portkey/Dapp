@@ -39,3 +39,4 @@ output/
 dist/
 postinstall.log
 
+**/release-key.keystore
