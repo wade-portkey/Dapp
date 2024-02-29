@@ -1,4 +1,4 @@
-package nft.ai.schrodinger
+package ai.nft.schrodinger
 
 import android.os.Build
 import android.os.Bundle
