@@ -13,7 +13,7 @@ interface IRequest<T> {
 }
 // 请求参数，params的泛型
 interface ILoginParams {
-  type: 'google'| 'apple' | 'telegram'; // 登录类型， 可选值：google, apple, telegram
+  type: 'Google'| 'Apple' | 'Telegram'; // 登录类型， 可选值：google, apple, telegram
 }
 // 回调参数args的类型
 interface IResponse<T> {

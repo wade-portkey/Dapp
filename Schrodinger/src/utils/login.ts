@@ -1,6 +1,7 @@
 import TelegramOverlay from "../component/TelegramOverlay";
 import { TelegramLogin } from "./telegramLogin";
 import appleLoginCall from './applelogin';
+import googleLoginCall from './googleLogin';
 
 export interface ILoginHandler{
   login(): Promise<string>;
@@ -8,7 +9,7 @@ export interface ILoginHandler{
 
 class GoogleLogin implements ILoginHandler{
   async login(): Promise<string> {
-    return 'xiofjoksafj';
+    return googleLoginCall();
   }
 }
 
