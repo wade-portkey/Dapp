@@ -1,5 +1,6 @@
 import TelegramOverlay from "../component/TelegramOverlay";
 import { TelegramLogin } from "./telegramLogin";
+import appleLoginCall from './applelogin';
 
 export interface ILoginHandler{
   login(): Promise<string>;
@@ -13,7 +14,7 @@ class GoogleLogin implements ILoginHandler{
 
 class AppleLogin implements ILoginHandler{
   login(): Promise<string> {
-    throw new Error("Method not implemented.");
+    return appleLoginCall();
   }
 }
 
