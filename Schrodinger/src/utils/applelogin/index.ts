@@ -1,9 +1,14 @@
 import { appleAuthAndroid } from '@invertase/react-native-apple-authentication';
 import appleLoginOnIOS from './ios';
+import { isIOS } from '../utils';
 
 const appleLogin = async () => {
-  const token = (await appleLoginOnIOS()) as string;
-  return token;
+  if (isIOS) {
+    const token = (await appleLoginOnIOS()) as string;
+    return token;
+  } else {
+    return (await appleLoginAndroid());
+  }
 };
 
 const appleLoginAndroid = async () => {
