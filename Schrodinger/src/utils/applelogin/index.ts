@@ -13,8 +13,8 @@ const appleLogin = async () => {
 
 const appleLoginAndroid = async () => {
   appleAuthAndroid.configure({
-    clientId: '', // todo_wade
-    redirectUri: '', // todo_wade
+    clientId: 'com.portkey.did.extension.service',
+    redirectUri: 'https://did-portkey.portkey.finance/api/app/AppleAuth/receive',
     scope: appleAuthAndroid.Scope.ALL,
     responseType: appleAuthAndroid.ResponseType.ALL,
   });
