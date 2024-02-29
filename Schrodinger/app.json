@@ -18,10 +18,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage": "./assets/logo-0.85x.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "ai.nft.schrodinger"
+      "package": "nft.ai.schrodinger"
     },
     "web": {
       "favicon": "./assets/icon.png"
