@@ -5,7 +5,6 @@ import { useFonts } from 'expo-font';
 global.Buffer = require('buffer').Buffer;
 
 export default function App() {
-  console.log('load App');
   useFonts({
     'Roboto-Regular': require('./src/assets/fonts/Roboto-Regular.ttf'),
     'Roboto-Medium': require('./src/assets/fonts/Roboto-Medium.ttf'),
