@@ -24,6 +24,7 @@
     "react-native-base64": "^0.2.1",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-safe-area-context": "4.8.2",
+    "@react-native-community/netinfo": "11.3.1",
     "react-native-svg": "14.1.0",
     "react-native-webview": "13.6.4",
     "rn-teaset": "0.1.2-alpha.1",

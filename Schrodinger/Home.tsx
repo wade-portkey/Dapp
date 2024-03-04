@@ -1,5 +1,6 @@
 import WebView, { WebViewMessageEvent, WebViewProps } from 'react-native-webview';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useNetInfo } from "@react-native-community/netinfo";
 import { StyleSheet, View } from 'react-native';
 import { LoadingBody } from './src/component/Loading';
 import { useLogin } from './hook';
@@ -55,8 +56,8 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
     height = '100%',
     source = { uri: 'http://localhost:3000' },
   } = props;
-  console.log('load webview')
   const webViewRef = React.useRef<WebView>(null);
+  const [loadSuccess, setLoadSuccess] = useState(false);
   // const [loading, setLoading] = useState(true);
   // deal with Webview(dapp) message post
   // useEffect(()=>{
@@ -65,6 +66,13 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
   //     console.log('token', token);
   //   }, 10000);
   // }, []);
+  const { type, isConnected } = useNetInfo();
+  useEffect(() => {
+    console.log('useNetInfo', type, isConnected);
+    if (!isConnected) return;
+    if (loadSuccess) return;
+    webViewRef.current?.reload();
+  }, [type, isConnected]);
   const handleMessage = useCallback(
     async (content: WebViewMessageEvent) => {
       console.log('from webview msg is:', JSON.stringify(content.nativeEvent.data));
@@ -120,7 +128,10 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
         //   console.log('onLoad',event.nativeEvent.url);
         // }}
         onLoadEnd={(event)=>{
-          console.log('onLoadEnd',event.nativeEvent.url);
+          console.log('onLoadEnd', JSON.stringify(event.nativeEvent));
+          if (Boolean(event?.nativeEvent?.url)) {
+            setLoadSuccess(true);
+          }
         }}
         // onLoad={() => overWriteFuncOfWebview()}
         style={{ height: height, width: width }}
