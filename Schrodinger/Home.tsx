@@ -6,20 +6,20 @@ import { useLogin } from './hook';
 
 const injectedJavaScript = `
 (function clientMethod() {
-  var portkeyAPP = {
+  var portkeyShellApp = {
       __GLOBAL_FUNC_INDEX__: 0,
       invokeClientMethod: function (request, callback) {
           const {type, params} = request;
           var callbackName;
           if (typeof callback === 'function') {
-              callbackName = '__CALLBACK__' + (portkeyAPP.__GLOBAL_FUNC_INDEX__++);
-              portkeyAPP[callbackName] = callback;
+              callbackName = '__CALLBACK__' + (portkeyShellApp.__GLOBAL_FUNC_INDEX__++);
+              portkeyShellApp[callbackName] = callback;
           }
           window.ReactNativeWebView.postMessage(JSON.stringify({type, params, callback: callbackName }));
       },
       invokeWebMethod: function (callback, args) {
           if (typeof callback==='string') {
-              var func = portkeyAPP[callback];
+              var func = portkeyShellApp[callback];
               if (typeof func === 'function') {
                   setTimeout(function () {
                       func.call(this, args);
@@ -28,10 +28,10 @@ const injectedJavaScript = `
           }
       },
   };
-  window.portkeyAPP = portkeyAPP;
+  window.portkeyShellApp = portkeyShellApp;
   window.webviewCallback = function(data) {
       console.log('webviewCallback', data);
-      window.portkeyAPP['invokeWebMethod'](data.callback, data.args);
+      window.portkeyShellApp['invokeWebMethod'](data.callback, data.args);
   };
 })();true;
 `;
