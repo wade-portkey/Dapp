@@ -2,14 +2,8 @@ import WebView, { WebViewMessageEvent, WebViewProps } from 'react-native-webview
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNetInfo } from "@react-native-community/netinfo";
 import { StyleSheet, View } from 'react-native';
-import { LoadingBody } from './src/component/Loading';
 import { useLogin } from './hook';
-import { telegramLogin } from './src/utils/login';
-const injectJavaScript = `
-    const tmpFunction = window.postMessage;
-    window.originalPostMessage = tmpFunction;
-    window.postMessage = function(message){window.ReactNativeWebView.postMessage(message)};
-`;
+
 const injectedJavaScript = `
 (function clientMethod() {
   var portkeyAPP = {
@@ -41,7 +35,6 @@ const injectedJavaScript = `
   };
 })();true;
 `;
-let webRef: any;
 
 interface CommonWebViewProps extends WebViewProps {
   width?: number;
@@ -58,20 +51,11 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
   } = props;
   const webViewRef = React.useRef<WebView>(null);
   const [loadSuccess, setLoadSuccess] = useState(false);
-  // const [loading, setLoading] = useState(true);
-  // deal with Webview(dapp) message post
-  // useEffect(()=>{
-  //   setTimeout(async ()=>{
-  //     const token =  await telegramLogin.login();
-  //     console.log('token', token);
-  //   }, 10000);
-  // }, []);
   const { type, isConnected } = useNetInfo();
   useEffect(() => {
-    console.log('useNetInfo', type, isConnected);
     if (!isConnected) return;
     if (loadSuccess) return;
-    webViewRef.current?.reload();
+    webViewRef?.current?.reload();
   }, [type, isConnected]);
   const handleMessage = useCallback(
     async (content: WebViewMessageEvent) => {
@@ -101,45 +85,22 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
     },
     [],
   );
-  // const renderLoading = () => {
-  //   if (!loading) return null;
-  //   return (
-  //     <View style={styles.loadingContainer}>
-  //       <LoadingBody iconType="loading" />
-  //     </View>
-  //   );
-  // };
-  // const loadEnd = useCallback(() => {
-  //   console.log('webview load end')
-  //   // setLoading(false)
-  // }, []);
-  // when onload , overWrite the postMessage func of Webview(dapp)
-  const overWriteFuncOfWebview = () => {
-    if (!webRef) throw Error('no WebViewRef');
-    webRef.injectJavaScript(injectJavaScript);
-  };
 
   return (
     <View style={styles.sectionContainer}>
       <MemoizedWebView
         ref={webViewRef}
         source={source}
-        // onLoad={(event)=>{
-        //   console.log('onLoad',event.nativeEvent.url);
-        // }}
         onLoadEnd={(event)=>{
-          console.log('onLoadEnd', JSON.stringify(event.nativeEvent));
           if (Boolean(event?.nativeEvent?.url)) {
             setLoadSuccess(true);
           }
         }}
-        // onLoad={() => overWriteFuncOfWebview()}
         style={{ height: height, width: width }}
         onMessage={handleMessage}
         {...props}
         injectedJavaScript={injectedJavaScript}
       />
-       {/* {renderLoading()} */}
     </View>
   );
 };

@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import TelegramOverlay from "../component/TelegramOverlay";
 import { ILoginHandler } from "./login";
 

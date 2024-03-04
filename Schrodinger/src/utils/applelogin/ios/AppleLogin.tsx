@@ -1,6 +1,6 @@
 import React from 'react';
 import { forwardRef, useMemo, useState, useCallback, useRef, useImperativeHandle, ReactNode } from 'react';
-import { StyleSheet, View, ViewStyle, StyleProp, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ViewStyle, StyleProp } from 'react-native';
 import WebView, { WebViewMessageEvent, WebViewProps } from 'react-native-webview';
 import { LoadingBody } from '../../../component/Loading';
 import { ModalBody } from '../../../component/ModalBody';

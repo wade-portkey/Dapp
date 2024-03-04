@@ -1,6 +1,6 @@
 import * as Google from 'expo-auth-session/providers/google';
 import * as Application from 'expo-application';
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { isIOS } from './utils';
 import { AccessTokenRequest, makeRedirectUri, AuthRequest } from 'expo-auth-session';
 
