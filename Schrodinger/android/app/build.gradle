@@ -80,10 +80,10 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 android {
     signingConfigs {
         debug {
-            storeFile file('../release-key.keystore')
-            storePassword 'portkey2022'
-            keyPassword 'portkey2022'
-            keyAlias 'my-key-alias'
+            storeFile file('./debug.keystore')
+            storePassword ''
+            keyPassword ''
+            keyAlias ''
         }
         release {
             storeFile file('../release-key.keystore')
