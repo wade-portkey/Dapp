@@ -40,3 +40,5 @@ dist/
 postinstall.log
 
 **/release-key.keystore
+
+**/appcenter-config.json
