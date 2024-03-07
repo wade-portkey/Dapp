@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "Awaken",
+    "slug": "Awaken",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "finance.awaken"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo-0.85x.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "finance.awaken"
+    },
+    "web": {
+      "favicon": "./assets/icon.png"
+    },
+    "plugins": [
+      "expo-font"
+    ]
+  },
+  "dappUrl": "https://www.awaken.finance/",
+  "googleClientId": {
+    "ios": "183226380326-38oi8hev1fug9js9gpbtdicgqgb81a78.apps.googleusercontent.com",
+    "web": "183226380326-ei86f6dh7v541u6m8c5karu57g00mu56.apps.googleusercontent.com"
+  } 
+}
