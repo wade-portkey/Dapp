@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useNetInfo } from "@react-native-community/netinfo";
 import { StyleSheet, View } from 'react-native';
 import { useLogin } from './hook';
+import { statusBarHeight, bottomBarHeight } from './src/utils/device';
 
 const injectedJavaScript = `
 (function clientMethod() {
@@ -26,6 +27,10 @@ const injectedJavaScript = `
                   }, 0);
               }
           }
+      },
+      deviceEnv: {
+        statusBarHeight: ${statusBarHeight},
+        bottomBarHeight: ${bottomBarHeight},
       },
   };
   window.portkeyShellApp = portkeyShellApp;

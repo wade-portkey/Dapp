@@ -11,7 +11,8 @@ export default function App() {
   });
   return (
     <View style={styles.container}>
-      <CommonWebView source={{uri: 'https://schrodingernft.ai/'}}/>
+      {/* <CommonWebView source={{uri: 'https://schrodingernft.ai/'}}/> */}
+      <CommonWebView source={{uri: 'http://192.168.10.161:3000/'}}/>
       <StatusBar style="auto" />
     </View>
   );

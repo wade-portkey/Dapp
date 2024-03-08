@@ -16,14 +16,14 @@ Dimensions.addEventListener('change', ({ window, screen }) => {
 
 export const isIOS = Platform.OS === 'ios';
 
-export const statusBarHeight = isIOS ? 20 : StatusBar.currentHeight ?? 20;
-
 export const isIphoneX = (() => {
   return (
     Platform.OS === 'ios' &&
     ((screenHeight >= X_HEIGHT && screenWidth >= X_WIDTH) || (screenHeight >= X_WIDTH && screenWidth >= X_HEIGHT))
   );
 })();
+
+export const statusBarHeight = isIOS ? (isIphoneX ? 44 : 20) : StatusBar.currentHeight ?? 20;
 
 export const isIphone12 = (() => {
   const model = Device.modelName || '';
