@@ -1,9 +1,11 @@
 import WebView, { WebViewMessageEvent, WebViewProps } from 'react-native-webview';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNetInfo } from "@react-native-community/netinfo";
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Linking } from 'react-native';
 import { useLogin } from './hook';
 import { statusBarHeight, bottomBarHeight } from './src/utils/device';
+import { ShouldStartLoadRequest } from 'react-native-webview/lib/WebViewTypes';
+import app from './app.json';
 
 const injectedJavaScript = `
 (function clientMethod() {
@@ -91,6 +93,19 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
     [],
   );
 
+  const onShouldStartLoadWithRequest = ({ url }: ShouldStartLoadRequest) => {
+    const { host } = new URL(url);
+    const { host: appHost } = new URL(app.hostUrl);
+    if (host == appHost) {
+      return true;
+    } else {
+      Linking.openURL(url).catch(er => {
+        console.log('Failed to open Link:', er.message);
+      });
+      return false;
+    }
+  };
+
   return (
     <View style={styles.sectionContainer}>
       <MemoizedWebView
@@ -105,6 +120,7 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
         onMessage={handleMessage}
         {...props}
         injectedJavaScript={injectedJavaScript}
+        onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
       />
     </View>
   );

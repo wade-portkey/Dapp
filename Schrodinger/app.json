@@ -29,5 +29,6 @@
     "plugins": [
       "expo-font"
     ]
-  }
+  },
+  "hostUrl": "https://schrodingernft.ai/"
 }
