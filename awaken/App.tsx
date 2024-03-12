@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, SafeAreaView } from 'react-native';
 import CommonWebView from './Home';
 import { useFonts } from 'expo-font';
+import appJson from './app.json'
 global.Buffer = require('buffer').Buffer;
 
 export default function App() {
@@ -11,8 +12,7 @@ export default function App() {
   });
   return (
     <SafeAreaView style={styles.container}>
-      {/* <CommonWebView source={{uri: 'http://192.168.11.13:3000/sign'}}/> */}
-      <CommonWebView source={{uri: 'https://www.awaken.finance/'}}/>
+      <CommonWebView source={{uri: appJson.dappUrl}}/>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
@@ -22,7 +22,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#1E212B',
     alignItems: 'center',
     justifyContent: 'center',
   },
