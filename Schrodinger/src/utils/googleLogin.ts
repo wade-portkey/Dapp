@@ -3,16 +3,24 @@ import * as Application from 'expo-application';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { isIOS } from './utils';
 import { AccessTokenRequest, makeRedirectUri, AuthRequest } from 'expo-auth-session';
+import { sleep } from '.';
 
 const Config = {
   GOOGLE_IOS_CLIENT_ID: '183226380326-38oi8hev1fug9js9gpbtdicgqgb81a78.apps.googleusercontent.com',
-  GOOGLE_ANDROID_CLIENT_ID: '183226380326-7ov54dl0p2noc8j9cmvl5c1s0e770f5u.apps.googleusercontent.com',
+  GOOGLE_ANDROID_CLIENT_ID: '183226380326-em97svk5eeu86qu8u4vu3qmeqmvrvmb9.apps.googleusercontent.com',
   GOOGLE_WEB_CLIENT_ID: '183226380326-ei86f6dh7v541u6m8c5karu57g00mu56.apps.googleusercontent.com',
 };
 
+if (!isIOS) {
+  GoogleSignin.configure({
+    offlineAccess: true,
+    webClientId: Config.GOOGLE_WEB_CLIENT_ID,
+  });
+}
+
 const googleLogin = async () => {
   const request = new AuthRequest({
-    clientId: Config.GOOGLE_IOS_CLIENT_ID ?? '',
+    clientId: isIOS ? Config.GOOGLE_IOS_CLIENT_ID : Config.GOOGLE_ANDROID_CLIENT_ID,
     redirectUri: makeRedirectUri({
       native: `${Application.applicationId}:/oauthredirect`,
     }),
@@ -41,11 +49,8 @@ const googleLogin = async () => {
   };
 
   const androidPromptAsync = async () => {
+    await sleep(500);
     try {
-      GoogleSignin.configure({
-        offlineAccess: true,
-        webClientId: Config.GOOGLE_WEB_CLIENT_ID,
-      });
       await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
       // google services are available
     } catch (err) {
@@ -53,6 +58,7 @@ const googleLogin = async () => {
     }
     const userInfo = await GoogleSignin.signIn();
     const token = await GoogleSignin.getTokens();
+    await GoogleSignin.signOut();
     return token.accessToken;
   };
 

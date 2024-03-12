@@ -39,6 +39,8 @@ output/
 dist/
 postinstall.log
 
-**/release-key.keystore
+**/*.keystore
+**/*.aab
+**/*.apk
 
 **/appcenter-config.json
