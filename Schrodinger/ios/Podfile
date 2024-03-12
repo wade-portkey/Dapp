@@ -46,12 +46,11 @@ target 'SchrodingerNFT' do
 
   use_react_native!(
     :path => config[:reactNativePath],
-#    :hermes_enabled => podfile_properties['expo.jsEngine'] == nil || podfile_properties['expo.jsEngine'] == 'hermes',
     :hermes_enabled => false,
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/..",
     # Note that if you have use_frameworks! enabled, Flipper will not work if enabled
-    :flipper_configuration => flipper_config
+    :flipper_configuration => FlipperConfiguration.disabled
   )
 
   post_install do |installer|
