@@ -26,9 +26,7 @@
     "web": {
       "favicon": "./assets/icon.png"
     },
-    "plugins": [
-      "expo-font"
-    ]
+    "plugins": ["expo-font"]
   },
-  "hostUrl": "https://schrodingerai.com/"
+  "hostUrl": "http://192.168.11.40:3000/ "
 }
