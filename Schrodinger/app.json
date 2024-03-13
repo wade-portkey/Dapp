@@ -28,5 +28,5 @@
     },
     "plugins": ["expo-font"]
   },
-  "hostUrl": "http://192.168.11.40:3000/ "
+  "hostUrl": "https://schrodingernft.ai/"
 }

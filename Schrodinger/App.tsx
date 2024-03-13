@@ -3,13 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import CommonWebView from './Home';
 import { useFonts } from 'expo-font';
 import app from './app.json';
-import { useEffect } from 'react';
 global.Buffer = require('buffer').Buffer;
 
 export default function App() {
-  useEffect(() => {
-    alert(app.hostUrl);
-  }, []);
   useFonts({
     'Roboto-Regular': require('./src/assets/fonts/Roboto-Regular.ttf'),
     'Roboto-Medium': require('./src/assets/fonts/Roboto-Medium.ttf'),
