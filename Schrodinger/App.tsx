@@ -12,7 +12,9 @@ export default function App() {
   });
   return (
     <View style={styles.container}>
-      <CommonWebView source={{ uri: app.hostUrl }} />
+      <CommonWebView source={{ uri: app.hostUrl, headers: {
+      'dark': 'true',
+    }, }} />
       <StatusBar style="auto" />
     </View>
   );

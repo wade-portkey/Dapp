@@ -54,7 +54,7 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
   const {
     width = '100%',
     height = '100%',
-    source = { uri: 'http://localhost:3000' },
+    source,
   } = props;
   const webViewRef = React.useRef<WebView>(null);
   const [loadSuccess, setLoadSuccess] = useState(false);
