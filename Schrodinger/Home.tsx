@@ -1,11 +1,11 @@
 import WebView, { WebViewMessageEvent, WebViewProps } from 'react-native-webview';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useNetInfo } from "@react-native-community/netinfo";
 import { StyleSheet, View, Linking } from 'react-native';
 import { useLogin } from './hook';
 import { statusBarHeight, bottomBarHeight } from './src/utils/device';
 import { ShouldStartLoadRequest } from 'react-native-webview/lib/WebViewTypes';
-import app from './app.json';
+import { useHostUrl } from './src/hooks/hostUrl';
+import Loading from './src/component/Loading'
 
 const injectedJavaScript = `
 (function clientMethod() {
@@ -58,12 +58,18 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
   } = props;
   const webViewRef = React.useRef<WebView>(null);
   const [loadSuccess, setLoadSuccess] = useState(false);
-  const { type, isConnected } = useNetInfo();
+  const { isLoading: isLoadingHostUrl, hostUrl } = useHostUrl();
   useEffect(() => {
-    if (!isConnected) return;
+    if (isLoadingHostUrl) {
+      Loading.show();
+    } else {
+      Loading.hide();
+    }
+    if (isLoadingHostUrl) return;
     if (loadSuccess) return;
     webViewRef?.current?.reload();
-  }, [type, isConnected]);
+  }, [isLoadingHostUrl]);
+
   const handleMessage = useCallback(
     async (content: WebViewMessageEvent) => {
       console.log('from webview msg is:', JSON.stringify(content.nativeEvent.data));
@@ -95,7 +101,7 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
 
   const onShouldStartLoadWithRequest = ({ url }: ShouldStartLoadRequest) => {
     const { host } = new URL(url);
-    const { host: appHost } = new URL(app.hostUrl);
+    const { host: appHost } = new URL(hostUrl);
     if (host == appHost) {
       return true;
     } else {
@@ -106,6 +112,11 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
     }
   };
 
+  if (isLoadingHostUrl) {
+    return (
+      <View />
+    );
+  }
   return (
     <View style={styles.sectionContainer}>
       <MemoizedWebView
