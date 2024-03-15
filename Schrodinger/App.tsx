@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import CommonWebView from './Home';
 import { useFonts } from 'expo-font';
-import app from './app.json';
 global.Buffer = require('buffer').Buffer;
 
 export default function App() {
@@ -12,7 +11,7 @@ export default function App() {
   });
   return (
     <View style={styles.container}>
-      <CommonWebView source={{ uri: app.hostUrl }} />
+      <CommonWebView />
       <StatusBar style="auto" />
     </View>
   );

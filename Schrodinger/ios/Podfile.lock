@@ -1074,6 +1074,8 @@ PODS:
     - React-perflogger (= 0.73.4)
   - RNAppleAuthentication (2.3.0):
     - React-Core
+  - RNCAsyncStorage (1.22.3):
+    - React-Core
   - RNGoogleSignin (8.2.2):
     - GoogleSignIn (~> 6.2)
     - React-Core
@@ -1151,6 +1153,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -1291,6 +1294,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNAppleAuthentication:
     :path: "../node_modules/@invertase/react-native-apple-authentication"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNGoogleSignin:
     :path: "../node_modules/@react-native-google-signin/google-signin"
   RNSVG:
@@ -1369,6 +1374,7 @@ SPEC CHECKSUMS:
   React-utils: 6e5ad394416482ae21831050928ae27348f83487
   ReactCommon: 5fd44dbef85dfbafc87facae700c66d2da71b2cb
   RNAppleAuthentication: e99eaf3c4c01ad8ecb6125dd6f0cfd98871685b5
+  RNCAsyncStorage: 10591b9e0a91eaffee14e69b3721009759235125
   RNGoogleSignin: 81521697b2c8f97f9a586ac7257b1a1d9b51b115
   RNSVG: ba3e7232f45e34b7b47e74472386cf4e1a676d0a
   RNVectorIcons: 210f910e834e3485af40693ad4615c1ec22fc02b

@@ -54,7 +54,6 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
   const {
     width = '100%',
     height = '100%',
-    source,
   } = props;
   const webViewRef = React.useRef<WebView>(null);
   const [loadSuccess, setLoadSuccess] = useState(false);
@@ -102,6 +101,8 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
   const onShouldStartLoadWithRequest = ({ url }: ShouldStartLoadRequest) => {
     const { host } = new URL(url);
     const { host: appHost } = new URL(hostUrl);
+    console.log('onShouldStartLoadWithRequest : ', hostUrl);
+    console.log('host : ', host);
     if (host == appHost) {
       return true;
     } else {
@@ -121,7 +122,7 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
     <View style={styles.sectionContainer}>
       <MemoizedWebView
         ref={webViewRef}
-        source={source}
+        source={{ uri: hostUrl }}
         onLoadEnd={(event)=>{
           if (Boolean(event?.nativeEvent?.url)) {
             setLoadSuccess(true);
