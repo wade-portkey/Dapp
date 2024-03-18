@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   },
   loadingStyle: {
     width: pTd(50),
+    height: pTd(50),
   },
   loadingBox: {
     ...GStyles.center,

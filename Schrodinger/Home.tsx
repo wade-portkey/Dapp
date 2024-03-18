@@ -101,8 +101,6 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
   const onShouldStartLoadWithRequest = ({ url }: ShouldStartLoadRequest) => {
     const { host } = new URL(url);
     const { host: appHost } = new URL(hostUrl);
-    console.log('onShouldStartLoadWithRequest : ', hostUrl);
-    console.log('host : ', host);
     if (host == appHost) {
       return true;
     } else {

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import OverlayModal from '../OverlayModal';
 import { Keyboard, View } from 'react-native';
 import { ModalBody } from '../ModalBody';
@@ -94,7 +94,11 @@ function TelegramSign({ onConfirm, onReject }: TelegramSignProps) {
     },
     [onReject],
   );
-  console.log( 'url', uri);
+
+    useEffect(() => {
+      console.log('loading : ', loading);
+    }, [loading]);
+
   return (
     <ModalBody title="Telegram Login" modalBodyType="bottom">
       <KeyboardAwareScrollView enableOnAndroid={true} contentContainerStyle={styles.container}>
@@ -148,6 +152,7 @@ const styles = StyleSheet.create({
   },
   loadingStyle: {
     width: pTd(50),
+    height: pTd(50),
   },
   loadingBox: {
     ...GStyles.center,
