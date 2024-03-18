@@ -95,10 +95,6 @@ function TelegramSign({ onConfirm, onReject }: TelegramSignProps) {
     [onReject],
   );
 
-    useEffect(() => {
-      console.log('loading : ', loading);
-    }, [loading]);
-
   return (
     <ModalBody title="Telegram Login" modalBodyType="bottom">
       <KeyboardAwareScrollView enableOnAndroid={true} contentContainerStyle={styles.container}>

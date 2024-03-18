@@ -14,7 +14,6 @@ export function useHostUrl() {
     fetch('https://schrodingernft.ai/api/app/config')
       .then(response => response.json())  
       .then((json) => {
-        console.log('res', json);
         if (json?.data?.shellAppUrl) {
           setHostUrl(json.data.shellAppUrl);
         }
