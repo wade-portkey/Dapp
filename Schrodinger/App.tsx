@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import CommonWebView from './Home';
 import { useFonts } from 'expo-font';
 global.Buffer = require('buffer').Buffer;
@@ -10,10 +10,10 @@ export default function App() {
     'Roboto-Medium': require('./src/assets/fonts/Roboto-Medium.ttf'),
   });
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <CommonWebView />
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
