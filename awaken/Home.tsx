@@ -112,7 +112,7 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
             setLoadSuccess(true);
           }
         }}
-        style={{ height: height, width: width }}
+        style={{ height: height, width: width, backgroundColor: '#1E212B'}}
         onMessage={handleMessage}
         {...props}
         injectedJavaScript={injectedJavaScript}
@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
   sectionContainer: {
     height: '100%',
     width: '100%',
+    backgroundColor: '#1E212B',
   },
   sectionTitle: {
     fontSize: 24,

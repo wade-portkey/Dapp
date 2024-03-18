@@ -30,7 +30,7 @@
       "expo-font"
     ]
   },
-  "dappUrl": "http://192.168.11.86:3000/",
+  "dappUrl": "https://awaken.finance/",
   "googleClientId": {
     "ios": "183226380326-38oi8hev1fug9js9gpbtdicgqgb81a78.apps.googleusercontent.com",
     "web": "183226380326-ei86f6dh7v541u6m8c5karu57g00mu56.apps.googleusercontent.com"
