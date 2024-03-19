@@ -101,7 +101,9 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
   const onShouldStartLoadWithRequest = ({ url }: ShouldStartLoadRequest) => {
     const { host } = new URL(url);
     const { host: appHost } = new URL(hostUrl);
-    if (host == appHost) {
+    console.log('host : ' + host);
+    console.log('appHost : ' + appHost);
+    if (host.endsWith(appHost)) {
       return true;
     } else {
       Linking.openURL(url).catch(er => {

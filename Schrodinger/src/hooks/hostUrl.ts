@@ -3,6 +3,9 @@ import { useNetInfo } from "@react-native-community/netinfo";
 import appConfig from '../../app.json';
 import { CustomHostStorageKey } from '../../src/component/CustomHost'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { isIOS } from '../utils/device';
+
+const shellAppUrlKey = isIOS ? 'shellAppUrlIOS' : 'shellAppUrlAndroid';
 
 export function useHostUrl() {
   const [isLoading, setLoading] = useState(true);
@@ -14,8 +17,8 @@ export function useHostUrl() {
     fetch('https://schrodingernft.ai/api/app/config')
       .then(response => response.json())  
       .then((json) => {
-        if (json?.data?.shellAppUrl) {
-          setHostUrl(json.data.shellAppUrl);
+        if (json?.data?.[shellAppUrlKey]) {
+          setHostUrl(json.data[shellAppUrlKey]);
         }
         setLoading(false);
       })
