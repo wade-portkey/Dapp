@@ -29,14 +29,16 @@ export function useHostUrl() {
   }, [isConnected])
 
   useEffect(() => {
-    AsyncStorage.getItem(CustomHostStorageKey).then((hostUrl) => {
-      if (hostUrl) {
-        setHostUrl(hostUrl);
-        setLoading(false);
-      } else {
-        fetchConfig();
-      }
-    });
+    setHostUrl(appConfig.hostTestUrl);
+    setLoading(false);
+    // AsyncStorage.getItem(CustomHostStorageKey).then((hostUrl) => {
+    //   if (hostUrl) {
+    //     setHostUrl(hostUrl);
+    //     setLoading(false);
+    //   } else {
+    //     fetchConfig();
+    //   }
+    // });
   }, [isConnected]);
   return {
     isLoading,
