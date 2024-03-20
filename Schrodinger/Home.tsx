@@ -98,12 +98,16 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
     [],
   );
 
+  const isWhiteListHost = (host: string) => {
+    // Google Recaptcha
+    return  host.endsWith('portkey.finance') || host.endsWith('google.com')
+  };
+
   const onShouldStartLoadWithRequest = ({ url }: ShouldStartLoadRequest) => {
     const { host } = new URL(url);
     const { host: appHost } = new URL(hostUrl);
-    console.log('host : ' + host);
-    console.log('appHost : ' + appHost);
-    if (host.endsWith(appHost)) {
+    
+    if (host.endsWith(appHost) || isWhiteListHost(host)) {
       return true;
     } else {
       Linking.openURL(url).catch(er => {
