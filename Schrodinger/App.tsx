@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import { StyleSheet, SafeAreaView, Platform, StatusBar as StatusBarRN } from 'react-native';
 import CommonWebView from './Home';
 import { useFonts } from 'expo-font';
 global.Buffer = require('buffer').Buffer;
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: Platform.OS === "android" ? StatusBarRN.currentHeight : 0
   },
   image: {
     height: '100%',
