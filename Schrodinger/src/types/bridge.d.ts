@@ -11,10 +11,23 @@ interface IRequest<T> {
   params?: T; // 方法参数, login 的参数格式
   callback: string; // callback name
 }
+
+interface ICommonRequest {
+  [key: string]: any;
+}
+
 // 请求参数，params的泛型
 interface ILoginParams {
   type: 'Google'| 'Apple' | 'Telegram'; // 登录类型， 可选值：google, apple, telegram
 }
+
+// 请求参数，params的泛型
+interface ISocialShareParams {
+  title: string; // 分享标题
+  url: string; // 分享链接
+  message: string; // 分享内容
+}
+
 // 回调参数args的类型
 interface IResponse<T> {
   status: number; // 状态, 1代表成功， 0代表失败
@@ -22,6 +35,12 @@ interface IResponse<T> {
   code?: number; // 失败代码
   data?: T;  // status为1时，获取到的数据
 }
+
+// 回调参数，data的泛型
+interface ICommonResponse {
+  [key: string]: any;
+}
+
 // 回调参数，data的泛型
 interface ILoginResponse {
   token: string; // 登录成功的token值

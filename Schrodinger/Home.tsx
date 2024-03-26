@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View, Linking } from 'react-native';
 import { useLogin } from './hook';
 import { statusBarHeight, bottomBarHeight } from './src/utils/device';
+import socialShare from './src/utils/socialShare';
 import { ShouldStartLoadRequest } from 'react-native-webview/lib/WebViewTypes';
 import { useHostUrl } from './src/hooks/hostUrl';
 import Loading from './src/component/Loading'
@@ -72,7 +73,7 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
   const handleMessage = useCallback(
     async (content: WebViewMessageEvent) => {
       console.log('from webview msg is:', JSON.stringify(content.nativeEvent.data));
-      const payload = JSON.parse(content.nativeEvent.data) as IRequest<ILoginParams>;
+      const payload = JSON.parse(content.nativeEvent.data) as IRequest<ICommonRequest>;
       try {
         if(payload.type === 'login'){
           const token  = await useLogin(payload.params?.type)
@@ -81,8 +82,19 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
             data: { token },
           }
           const callbackData = {callback: payload.callback, args};
-          console.log('return to webview msg is:', JSON.stringify(callbackData));
           webViewRef.current?.injectJavaScript(`window.webviewCallback(${JSON.stringify(callbackData)})`)
+        } else if (payload.type === 'socialShare') {
+          const res = await socialShare(payload.params as ISocialShareParams);
+          const args: IResponse<ICommonResponse> = {
+            status: res ? 1 : 0,
+            data: {
+              desc: res ? 'share success' : 'share failed',
+            },
+          }
+          const callbackData = {callback: payload.callback, args};
+          webViewRef.current?.injectJavaScript(`window.webviewCallback(${JSON.stringify(callbackData)})`)
+        } else {
+          throw new Error('Unsupported bridge method called: ' + payload.type);
         }
       } catch (err: any) {
         console.warn(err.toString());
