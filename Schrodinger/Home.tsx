@@ -88,7 +88,7 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
           const args: IResponse<ICommonResponse> = {
             status: res ? 1 : 0,
             data: {
-              desc: res ? 'share success' : 'share failed',
+              desc: res ? 'share success' : 'share canceled',
             },
           }
           const callbackData = {callback: payload.callback, args};
