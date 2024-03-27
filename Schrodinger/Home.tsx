@@ -144,6 +144,7 @@ const CommonWebView: React.FC<CommonWebViewProps> = props => {
             setLoadSuccess(true);
           }
         }}
+        onContentProcessDidTerminate={() => webViewRef?.current?.reload()}
         style={{ height: height, width: width }}
         onMessage={handleMessage}
         {...props}
